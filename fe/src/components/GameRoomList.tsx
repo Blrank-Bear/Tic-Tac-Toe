@@ -7,12 +7,13 @@ const GameRoomList = () => {
   const create_room = async () => {
     const user_id = localStorage.getItem('user_id');
     console.log(user_id);
-    const response = await axios.post('http://localhost:8000/game/create', { creatorId: user_id });
+    const response = await axios.post('http://192.168.137.29:8000/game/create', { creatorId: user_id });
+    window.location.href = '/rooms';
   }
 
   useEffect(() => {
     const fetchRooms = async () => {
-      const response = await axios.get('http://localhost:8000/game/rooms');
+      const response = await axios.get('http://192.168.137.29:8000/game/rooms');
       setRooms(response.data);
     };
     fetchRooms();
@@ -20,7 +21,7 @@ const GameRoomList = () => {
 
   const handleJoin = async (room: any) => {
     const user_id = localStorage.getItem('user_id');
-    const response = await axios.post('http://localhost:8000/game/join', {roomId: room.id, user_id})
+    const response = await axios.post('http://192.168.137.29:8000/game/join', {roomId: room.id, user_id})
     console.log(response.data);
     if(response.data.status == 'ok')
       window.location.href = `/game/${room.id}`;

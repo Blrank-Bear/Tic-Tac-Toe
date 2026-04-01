@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import './css/Game.css'
 import axios from 'axios';
 
-const socket = io('http://localhost:8000'); // Adjust the URL if needed
+const socket = io('http://192.168.137.29:8000'); // Adjust the URL if needed
 
 const calculateWinner = (squares: any) => {
   const lines = [
@@ -66,7 +66,7 @@ const Game = ({ }: any) => {
   }, [board, roomId]);
 
   useEffect(() => {
-    axios.post('http://localhost:8000/game/room', { roomId })
+    axios.post('http://192.168.137.29:8000/game/room', { roomId })
       .then((res) => {
         // console.log(res);
         setCreator(res.data[0].creator);

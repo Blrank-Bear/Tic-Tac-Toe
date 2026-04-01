@@ -24,7 +24,7 @@ exports.getRooms = async (req, res) => {
 exports.joinRoom = async (req, res) => {
   const {user_id, roomId} = req.body;
   try {
-    const result = await pool.query(`SELECT * FROM rooms WHERE id = '${roomId}'`);
+    const [result] = await pool.query(`SELECT * FROM rooms WHERE id = '${roomId}'`);
     if(result[0].creator == user_id)
     {
       res.status(200).json({status: 'ok'});

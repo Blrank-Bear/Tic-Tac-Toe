@@ -9,7 +9,7 @@ const Login = () => {
   const handleLogin = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/auth/login', { email, password });
+      const response = await axios.post('http://192.168.137.29:8000/auth/login', { email, password });
       console.log(response.data.user.id);
       localStorage.setItem('user_id', response.data.user.id);
       alert('Login successful!');

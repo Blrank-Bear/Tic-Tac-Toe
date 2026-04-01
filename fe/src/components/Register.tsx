@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './css/register.css'
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -11,7 +12,7 @@ const Register = () => {
   const handleRegister = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/auth/register', { name, gender, dob, email, password });
+      const response = await axios.post('http://192.168.137.29:8000/auth/register', { name, gender, dob, email, password });
       alert('Registration successful!');
       // Redirect to login
       window.location.href = '/login';
