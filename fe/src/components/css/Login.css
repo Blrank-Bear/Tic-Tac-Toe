@@ -1,0 +1,28 @@
+.main {
+    width: 50%;
+    height: auto;
+    padding: 30px;
+    background-color: rgb(153, 157, 160);
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-pannel {
+    width: 300px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    font-size: 15pt;
+    margin-bottom: 20px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
