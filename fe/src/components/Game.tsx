@@ -70,7 +70,7 @@ const Game = ({ }: any) => {
       .then((res) => {
         // console.log(res);
         setCreator(res.data[0].creator);
-        setPlayer(user_id == creator ? 'X' : 'O');
+        setPlayer(user_id == res.data[0].creator ? 'X' : 'O');
       })
   }, []);
 

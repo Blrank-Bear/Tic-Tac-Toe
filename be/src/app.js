@@ -16,31 +16,9 @@ app.use('/auth', authRouter);
 app.use('/game', gameRouter);
 
 // //insert database
-// pool.connect();
+// pool.connect()
 //   .then(() => {
-//     const Query = `CREATE TABLE users (
-//       id SERIAL PRIMARY KEY,
-//       name VARCHAR NOT NULL,
-//       gender VARCHAR NOT NULL,
-//       dob DATE NOT NULL,
-//       email VARCHAR UNIQUE NOT NULL,
-//       password VARCHAR NOT NULL
-//     );
-
-//     CREATE TABLE rooms (
-//       id SERIAL PRIMARY KEY,
-//       creator INT NOT NULL,
-//       joiner INT,
-//       status INT DEFAULT 0
-//     );
-
-//     CREATE TABLE game_history (
-//       id SERIAL PRIMARY KEY,
-//       room_id INT NOT NULL,
-//       winner VARCHAR,
-//       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-//     );`
-//     pool.query(Query);
+//     console.log('database connected');
 //   })
 
 // Socket.IO setup
