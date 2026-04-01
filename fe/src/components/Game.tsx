@@ -28,12 +28,11 @@ const Game = ({ }: any) => {
   const user_id = localStorage.getItem('user_id');
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
-  const [player, setPlayer] = useState(user_id == roomId ? 'X' : 'O'); // Assume player X starts
+  const [player, setPlayer] = useState(user_id == creator ? 'X' : 'O'); // Assume player X starts
   const winner = calculateWinner(board);
   const status = winner ? `Winner: ${winner}` : `Next player: ${isXNext ? 'X' : 'O'}`;
   
   const handleClick = (index: any) => {
-    // console.log(creator);
     if (user_id == creator) {
       if (!isXNext) return;
     }
@@ -50,7 +49,7 @@ const Game = ({ }: any) => {
     // Emit the move to the server
     socket.emit('make_move', { roomId, index, player });
   };
-  
+
   useEffect(() => {
     socket.emit('join_room', { roomId, user_id });
 
@@ -71,6 +70,7 @@ const Game = ({ }: any) => {
       .then((res) => {
         // console.log(res);
         setCreator(res.data[0].creator);
+        setPlayer(user_id == creator ? 'X' : 'O');
       })
   }, []);
 
