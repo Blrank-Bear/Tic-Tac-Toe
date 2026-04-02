@@ -3,7 +3,6 @@ const http = require('http');
 const { Server } = require('socket.io');
 const authRouter = require('./routes/auth.js');
 const gameRouter = require('./routes/game.js');
-const pool = require('./service/Pool.js');
 const cors = require('cors');
 
 const app = express();

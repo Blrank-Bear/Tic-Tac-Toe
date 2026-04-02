@@ -1,4 +1,4 @@
-import { Square } from "./Sqiare";
+import { Square } from "./Square";
 
 export const Board = ({ board, onClick }: any) => {
   return (

@@ -2,28 +2,32 @@ import styles from "./Game.module.css";
 import { useParams } from "react-router-dom";
 import { useGame } from "../../hooks/useGame";
 import { useSocket } from "../../hooks/useSocket";
-import { emitEvent } from "../../services/socket";
+import { emitEvent } from "../../socket/socket";
 import { useEffect, useState } from "react";
-import { getRoom } from "../../services/game.service";
+import { getRoomCreator } from "../../apis/game.service";
+import { getLocalStorage } from "../../utils/localStorage";
+import { PLAYER_CLICK } from "../../utils/define";
 
 const Game = () => {
   const { roomId } = useParams();
   const [creator, setCreator] = useState<number>(0);
-  const user_id: any = localStorage.getItem('user_id');
-  const { board, setBoard, isXNext, winner, makeMove } = useGame();
+  const { board, setBoard, isFirstPlayer, winner, clickBoard } = useGame();
+  
+  // const userId: any = localStorage.getItem('userId');
+  const userId: number = getLocalStorage().userId;
 
   const handleClick = (index: number) => {
-    if(creator == user_id) {
-        if(!isXNext)return ;
+    if(creator == userId) {
+        if(!isFirstPlayer) return;
     }
     else {
-        if(isXNext)return ;
+        if(isFirstPlayer) return;
     }
-    makeMove(index, isXNext ? "X" : "O");
+    clickBoard(index, isFirstPlayer ? "X" : "O");
     emitEvent("make_move", { roomId, index });
   };
 
-  useSocket("move_made", (data) => {
+  useSocket(PLAYER_CLICK, (data) => {
     setBoard((prev: any) => {
       const newBoard = [...prev];
       newBoard[data.index] = data.player;
@@ -32,8 +36,8 @@ const Game = () => {
   });
 
   useEffect(() => {
-    const res = getRoom(roomId);
-    setCreator(res);
+    const creatorId = getRoomCreator(roomId);
+    setCreator(creatorId);
   }, [])
 
   return (
@@ -42,7 +46,7 @@ const Game = () => {
         <h2 className={styles.title}>Tic Tac Toe</h2>
 
         <div className={styles.status}>
-          {winner ? `Winner: ${winner}` : `Next: ${isXNext ? "X" : "O"}`}
+          {winner ? `Winner: ${winner}` : `Next: ${isFirstPlayer ? "X" : "O"}`}
         </div>
 
         <div className={styles.board}>

@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { Board, Square } from "../types";
-import { calculateWinner } from "../services/game.service";
+import { calculateWinner } from "../apis/game.service";
 
 export const useGame = () => {
   const [board, setBoard] = useState<Board>(Array(9).fill(null));
-  const [isXNext, setIsXNext] = useState(true);
+  const [isFirstPlayer, setIsFirstPlayer] = useState(true);
 
   const winner = calculateWinner(board);
 
-  // ✅ FIX: change player type from string → Square
-  const makeMove = (index: number, player: Square) => {
+  // FIX: change player type from string → Square
+  const clickBoard = (index: number, player: Square) => {
     if (board[index] || winner) return;
 
     const newBoard = [...board];
-    newBoard[index] = player; // ✅ now valid
+    newBoard[index] = player; // now valid
     setBoard(newBoard);
-    setIsXNext(!isXNext);
+    setIsFirstPlayer(!isFirstPlayer);
   };
 
-  return { board, setBoard, isXNext, winner, makeMove };
+  return { board, setBoard, isFirstPlayer, winner, clickBoard };
 };

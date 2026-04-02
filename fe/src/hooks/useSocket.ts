@@ -1,9 +1,12 @@
 import { useEffect } from "react";
-import { onEvent, offEvent } from "../services/socket";
+import { socketOn, socketOff } from "../socket/socket";
 
-export const useSocket = (event: string, callback: (data: any) => void) => {
+export const useSocket = (
+  event: string, 
+  callback: (data: any) => void
+) => {
   useEffect(() => {
-    onEvent(event, callback);
-    return () => offEvent(event);
+    socketOn(event, callback);
+    return () => socketOff(event);
   }, [event]);
 };

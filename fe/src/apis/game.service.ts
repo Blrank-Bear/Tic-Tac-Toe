@@ -16,7 +16,7 @@ export const calculateWinner = (squares: Board) => {
     return null;
 };
 
-export const getRoom = (roomId: any): number => {
+export const getRoomCreator = (roomId: any): number => {
     api.post("/game/room", { roomId })
         .then((res) => {
             return res.data.creator;
@@ -34,8 +34,8 @@ export const getRooms = (): Room[] | null => {
     return null
 }
 
-export const createRoom = (user_id: any) => {
-    api.post('/game/create', { creatorId: user_id })
+export const createRoom = (userId: any) => {
+    api.post('/game/create', { creatorId: userId })
         .then((res) => {
             window.location.href = '/rooms';
         })

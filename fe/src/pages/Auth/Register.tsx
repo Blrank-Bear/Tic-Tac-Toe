@@ -1,6 +1,6 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useState } from "react"; // fix
 import styles from "./Auth.module.css";
-import { register } from "../../services/auth.server";
+import { register } from "../../apis/auth.server";
 
 const Register = () => {
     const [email, setEmail] = useState<string>('');
