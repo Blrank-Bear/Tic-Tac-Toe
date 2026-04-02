@@ -1,29 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import io from 'socket.io-client';
 import './css/Game.css'
 import axios from 'axios';
 import { Board, Squer } from '../type';
+import { calculateWinner } from '../service/service';
+import { socket_api } from '../service/socket';
 
-
-const socket = io('http://192.168.137.29:8000'); // Adjust the URL if needed
-
-const calculateWinner = (squares: Board) => {
-  const lines = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8],
-    [0, 3, 6], [1, 4, 7], [2, 5, 8],
-    [0, 4, 8], [2, 4, 6],
-  ];
-  for (let line of lines) {
-    const [a, b, c] = line;
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return null;
-};
-
-const Game = ({ }: any) => {
+const Game: React.FC = () => {
   const parms = useParams();
   const { roomId } = parms;
   const [creator, setCreator] = useState<string>('0');
@@ -33,7 +16,7 @@ const Game = ({ }: any) => {
   const [player, setPlayer] = useState<Squer>(user_id == creator ? 'X' : 'O'); // Assume player X starts
   const winner = calculateWinner(board);
   const status = winner ? `Winner: ${winner}` : `Next player: ${isXNext ? 'X' : 'O'}`;
-  
+
   const handleClick = (index: number) => {
     if (user_id == creator) {
       if (!isXNext) return;
@@ -49,21 +32,24 @@ const Game = ({ }: any) => {
     setIsXNext(!isXNext);
 
     // Emit the move to the server
-    socket.emit('make_move', { roomId, index, player });
+    socket_api(0, 'make_move', { roomId, index, player });
   };
 
-  useEffect(() => {
-    socket.emit('join_room', { roomId, user_id });
+  const move_made = (data: any) => {
+    const newBoard = board.slice();
+    newBoard[data.index] = data.player;
+    setBoard(newBoard);
+    setIsXNext(data.player === 'X' ? false : true);
+  }
 
-    socket.on('move_made', ({ index, player }) => {
-      const newBoard = board.slice();
-      newBoard[index] = player;
-      setBoard(newBoard);
-      setIsXNext(player === 'X' ? false : true);
-    });
+  useEffect(() => {
+    socket_api(0, 'join_room', { roomId, user_id })
+
+    const propdata = socket_api(1, 'move_made', {});
+    move_made(propdata);
 
     return () => {
-      socket.off('move_made');
+      socket_api(2, 'move_made', {});
     };
   }, [board, roomId]);
 
