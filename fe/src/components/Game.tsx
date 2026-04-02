@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import './css/Game.css'
 import axios from 'axios';
+import { Board, Squer } from '../type';
+
 
 const socket = io('http://192.168.137.29:8000'); // Adjust the URL if needed
 
-const calculateWinner = (squares: any) => {
+const calculateWinner = (squares: Board) => {
   const lines = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
     [0, 3, 6], [1, 4, 7], [2, 5, 8],
@@ -24,15 +26,15 @@ const calculateWinner = (squares: any) => {
 const Game = ({ }: any) => {
   const parms = useParams();
   const { roomId } = parms;
-  const [creator, setCreator] = useState<any>(0);
+  const [creator, setCreator] = useState<string>('0');
   const user_id = localStorage.getItem('user_id');
-  const [board, setBoard] = useState(Array(9).fill(null));
+  const [board, setBoard] = useState<Board>(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
-  const [player, setPlayer] = useState(user_id == creator ? 'X' : 'O'); // Assume player X starts
+  const [player, setPlayer] = useState<Squer>(user_id == creator ? 'X' : 'O'); // Assume player X starts
   const winner = calculateWinner(board);
   const status = winner ? `Winner: ${winner}` : `Next player: ${isXNext ? 'X' : 'O'}`;
   
-  const handleClick = (index: any) => {
+  const handleClick = (index: number) => {
     if (user_id == creator) {
       if (!isXNext) return;
     }
