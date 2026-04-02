@@ -1,0 +1,99 @@
+/* Page container */
+.container {
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Title */
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 30px;
+}
+
+/* Room list wrapper */
+.list {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Each room card */
+.roomCard {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.2s ease;
+}
+
+/* Hover effect */
+.roomCard:hover {
+    background: #334155;
+    transform: translateY(-2px);
+}
+
+/* Room name */
+.roomName {
+    font-size: 16px;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+/* Actions (button area) */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Empty state */
+.empty {
+    color: #94a3b8;
+    margin-top: 20px;
+}
+
+/* Create room button wrapper */
+.createWrapper {
+    margin-bottom: 20px;
+}
+
+.createBtn {
+    margin: 10px;
+    padding: 10px;
+    font-size: 14pt;
+    background-color: #146e50;
+    border: 2px solid rgb(100, 100, 100);
+    box-shadow: 0px 0px 5px white;
+    cursor: pointer;
+    transition: 1s;
+    color: white;
+}
+
+.createBtn:hover {
+    background-color: #0c3829;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .roomCard {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

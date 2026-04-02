@@ -2,13 +2,14 @@ const pool = require('../service/Pool.js');
 const bcrypt = require('bcrypt');
 
 exports.registerUser = async (req, res) => {
-  const { name, gender, dob, email, password } = req.body;
+  console.log(123);
+  const { email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
   
   try {
     const [result] = await pool.query(
-      'INSERT INTO users (name, gender, dob, email, password) VALUES (?, ?, ?, ?, ?)',
-      [name, gender, dob, email, hashedPassword]
+      'INSERT INTO users (email, password) VALUES (?, ?)',
+      [email, hashedPassword]
     );
     res.status(201).json(result[0]);
   } catch (error) {

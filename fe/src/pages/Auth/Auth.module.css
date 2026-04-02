@@ -1,0 +1,72 @@
+/* Container */
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+/* Card */
+.card {
+    background: #1e293b;
+    padding: 40px;
+    border-radius: 16px;
+    width: 320px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+/* Title */
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #f8fafc;
+}
+
+/* Input */
+.input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #334155;
+    background: #0f172a;
+    color: #f1f5f9;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+/* Button wrapper */
+.buttonWrapper {
+    margin-top: 10px;
+}
+
+/* Footer text */
+.footer {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.link {
+    color: #3b82f6;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.registerBtn {
+    background-color: aquamarine;
+    color: #000;
+}

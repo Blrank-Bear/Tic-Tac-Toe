@@ -1,0 +1,112 @@
+/* Main container */
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    font-family: 'Inter', sans-serif;
+  }
+  
+  /* Game card */
+  .card {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+  
+  /* Title */
+  .title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 15px;
+  }
+  
+  /* Status text */
+  .status {
+    font-size: 18px;
+    color: #cbd5f5;
+    margin-bottom: 20px;
+  }
+  
+  /* Board wrapper */
+  .boardWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Board grid */
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 90px);
+    gap: 10px;
+  }
+  
+  /* Square button */
+  .square {
+    width: 90px;
+    height: 90px;
+    border-radius: 12px;
+    border: 2px solid #334155;
+    background: #0f172a;
+    color: #f8fafc;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  /* Hover */
+  .square:hover {
+    background: #334155;
+    transform: scale(1.05);
+  }
+  
+  /* Click */
+  .square:active {
+    transform: scale(0.95);
+  }
+  
+  /* Disabled state */
+  .square:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+  /* X and O styling */
+  .x {
+    color: #38bdf8;
+  }
+  
+  .o {
+    color: #f472b6;
+  }
+  
+  /* Winner highlight */
+  .winner {
+    background: #22c55e !important;
+    color: white !important;
+  }
+  
+  /* Responsive */
+  @media (max-width: 500px) {
+    .board {
+      grid-template-columns: repeat(3, 70px);
+      gap: 8px;
+    }
+  
+    .square {
+      width: 70px;
+      height: 70px;
+      font-size: 24px;
+    }
+  
+    .card {
+      padding: 20px;
+    }
+  }
